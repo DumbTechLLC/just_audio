@@ -370,6 +370,10 @@
         return -1;
     } else if (_indexedAudioSources && _indexedAudioSources.count > 0) {
         int v = (int)(1000 * CMTimeGetSeconds(_indexedAudioSources[_index].duration));
+        if (v == 0) {
+            // If duration is 0, return the buffered position instead
+            return _bufferedPosition;
+        }
         return v;
     } else {
         return 0;
